@@ -1,0 +1,51 @@
+// A graphical object representing two numbers, visually, as random dots
+
+import java.awt.*;
+import java.util.Random;
+
+public class VisualTwoNums
+{
+   private int x, y;          // coordinates in Graphics context
+   private int width, height; // dimensions
+   private int num1, num2;    // data: two numbers to be represented as dots
+   private String description;// descriptive string
+
+
+   public VisualTwoNums(int x, int y, int width, int height, int num1, int num2, String description)
+   {
+      this.x = x;
+      this.y = y;
+      this.width = width;
+      this.height = height;
+      this.num1 = num1;
+      this.num2 = num2;
+      this.description = description;
+   }
+
+   public void draw (Graphics p)
+   {
+      // background rectangle
+      p.setColor(Color.blue);
+      p.fillRect(x, y, width, height);
+
+      Random rand = new Random();
+
+      // randomly distributed num1 dots in black
+      p.setColor(Color.black);
+      for (int i= 0; i< num1; i++)
+         p.fillRect(x+ rand.nextInt(width), y+ rand.nextInt(height), 2, 2);
+
+      // randomly distributed num2 dots in yellow
+      p.setColor(Color.yellow);
+      for (int i= 0; i< num2; i++)
+         p.fillRect(x+ rand.nextInt(width), y+ rand.nextInt(height), 2, 2);
+
+      // a transparent dark blue color so that text shows up against the dots
+      p.setColor(new Color(0, 0, (float) 0.5, (float) 0.5));
+
+      p.fillRect(x + 5, y + 15, 700, 30);
+      p.setColor(Color.yellow);
+      p.setFont(new Font("Helvetica", Font.BOLD, 20));
+      p.drawString(description, x+15, y+40);
+   }
+}
